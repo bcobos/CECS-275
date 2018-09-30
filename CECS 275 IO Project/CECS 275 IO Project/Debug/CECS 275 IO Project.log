@@ -1,0 +1,5 @@
+﻿  IOProject.cpp
+c:\users\cobos\source\repos\cecs 275 io project\cecs 275 io project\ioproject.cpp(266): warning C4018: '<': signed/unsigned mismatch
+c:\users\cobos\source\repos\cecs 275 io project\cecs 275 io project\ioproject.cpp(295): warning C4018: '<': signed/unsigned mismatch
+c:\users\cobos\source\repos\cecs 275 io project\cecs 275 io project\ioproject.cpp(395): warning C4010: single-line comment contains line-continuation character
+  CECS 275 IO Project.vcxproj -> C:\Users\cobos\source\repos\CECS 275 IO Project\Debug\CECS 275 IO Project.exe

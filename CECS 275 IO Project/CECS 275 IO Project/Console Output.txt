@@ -1,0 +1,70 @@
+Please enter the file name to read:
+IOInput.txt
+1 - Change an existing country
+2 - Add a new country
+3 - Delete a country
+4 - List the defined countries
+5 - Exit
+Please enter an integer between 1 and 5
+1
+Please input the name of the country you'd like to edit (CASE SENSITIVE):
+Yemen
+What would you like to change about the country?
+1 - Population
+2 - Area (in sq mi)
+Please enter an integer between 1 and 2
+1
+Please enter a new population for Yemen
+Please enter an integer between 0 and 100000000
+55
+Yemen's population is now 55
+1 - Change an existing country
+2 - Add a new country
+3 - Delete a country
+4 - List the defined countries
+5 - Exit
+Please enter an integer between 1 and 5
+2
+Please enter the name of your new country
+USA
+Please enter the population of your new country
+Please enter an integer between 0 and 100000000
+55000
+Please enter the size (in sq mi) of your new country
+Please enter an integer between 0 and 100000000
+3567
+USA has been added successfully.
+1 - Change an existing country
+2 - Add a new country
+3 - Delete a country
+4 - List the defined countries
+5 - Exit
+Please enter an integer between 1 and 5
+3
+Which country would you like to delete? Please give name (case sensitive):
+Zambia
+Zambia has been deleted successfully.
+1 - Change an existing country
+2 - Add a new country
+3 - Delete a country
+4 - List the defined countries
+5 - Exit
+Please enter an integer between 1 and 5
+4
+Country Name                  Country Population            Country Area (in sq mi)
+======================================================================================
+Algeria                       34994937                      919590
+Andorra                       84825                         181
+Mauritania                    3281634                       397953
+USA                           55000                         3567
+Yemen                         55                            203849
+Zimbabwe                      12084304                      150803
+1 - Change an existing country
+2 - Add a new country
+3 - Delete a country
+4 - List the defined countries
+5 - Exit
+Please enter an integer between 1 and 5
+5
+The file contents have been written to output.txt successfully.
+Completed successfully

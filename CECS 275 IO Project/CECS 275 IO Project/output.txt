@@ -1,0 +1,8 @@
+Country Name                  Country Population            Country Area (in sq mi)       
+======================================================================================
+Algeria                       34994937                      919590                        
+Andorra                       84825                         181                           
+Mauritania                    3281634                       397953                        
+USA                           55000                         3567                          
+Yemen                         55                            203849                        
+Zimbabwe                      12084304                      150803                        
