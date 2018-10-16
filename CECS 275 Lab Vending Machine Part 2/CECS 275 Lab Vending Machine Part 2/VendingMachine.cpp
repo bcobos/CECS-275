@@ -1,0 +1,1 @@
+//file containing definitions of VendingMachine class
