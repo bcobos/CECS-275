@@ -115,11 +115,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\CECS 275 Lab Vending Machine 1\CECS 275 Lab Vending Machine 1\Soda.h" />
+    <ClInclude Include="Soda.h" />
     <ClInclude Include="VendingMachine.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\CECS 275 Lab Vending Machine 1\CECS 275 Lab Vending Machine 1\Soda.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Soda.cpp" />
     <ClCompile Include="VendingMachine.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

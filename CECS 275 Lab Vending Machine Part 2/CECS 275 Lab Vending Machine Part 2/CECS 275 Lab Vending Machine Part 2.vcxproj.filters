@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\CECS 275 Lab Vending Machine 1\CECS 275 Lab Vending Machine 1\Soda.h">
+    <ClInclude Include="Soda.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VendingMachine.h">
@@ -23,7 +23,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\CECS 275 Lab Vending Machine 1\CECS 275 Lab Vending Machine 1\Soda.cpp">
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Soda.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="VendingMachine.cpp">

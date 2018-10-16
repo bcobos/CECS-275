@@ -3,11 +3,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Soda.h" //??Why doesn't this work?
+#include "Soda.h" 
 
 using namespace std;
 
-class VendingMachine {
+class VendingMachine { 
 private:
 	//Member variables
 	string locationDescription;
@@ -18,6 +18,7 @@ public:
 	//Member functions
 	VendingMachine();	//default constructor
 	VendingMachine(string); //constructor
-	vend()
-
-};
+	bool vend(Soda);
+	void stock(Soda);
+	string to_string();
+}; //end of VendingMachine class
