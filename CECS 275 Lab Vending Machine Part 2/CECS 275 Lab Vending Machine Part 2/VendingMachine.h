@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
 #include "Soda.h" 
 
 using namespace std;
@@ -12,7 +13,7 @@ private:
 	//Member variables
 	string locationDescription;
 	vector<Soda> inventory;
-	int tokenCount;
+	unsigned int tokenCount;
 
 public:
 	//Member functions

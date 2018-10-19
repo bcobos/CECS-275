@@ -13,7 +13,7 @@
 //using std::string;
 using namespace std;
 
-//Note structs default to public visibility...
+//Note structs default to public visibility... Classes default to private.
 class Soda {
 private:
 	//Member variables

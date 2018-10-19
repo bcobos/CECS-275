@@ -28,7 +28,6 @@ string Soda::to_string() {
 	stringstream ss;
 	ss << "Soda name: " << name << endl;
 	ss << "Soda quantity: " << quantity << endl;
-	//	ss << "Soda Price per can: " << unitPrice << endl;
 
 	return ss.str();
 } //end of Soda to_string function 
@@ -60,7 +59,6 @@ int Soda::getQuantity() {
   * @param delta the change in soda quantity
   */
 void Soda::changeQuantity(int delta) {
-	//TODO shoud this be chaching current quantity, or is that done outside?
 	this->quantity += delta;
 } //end of Soda::changeQuantity member function
 
