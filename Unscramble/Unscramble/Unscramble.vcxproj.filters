@@ -21,9 +21,15 @@
     <ClCompile Include="Dictionary.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="PartialSolution.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dictionary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PartialSolution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

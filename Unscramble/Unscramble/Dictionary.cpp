@@ -37,7 +37,6 @@ int Dictionary::initialize() {
  * @return location of the word, if found. On fail, returns -1
  */
 int Dictionary::locateStart(string key, int low, int high, bool exact) {
-	//TODO think this process out more on paper before continuing!!
 	int result = -1; //set to fail by default. 
 	if (exact) {
 		//Check for failure first:
@@ -46,9 +45,9 @@ int Dictionary::locateStart(string key, int low, int high, bool exact) {
 		//Full Binary Search:
 		int mid = (low + high) / 2;
 		if (key < wordList[mid])	//if key is lower in dictionary than current word
-			return locateStart(key, low, mid, true);
+			return locateStart(key, low, mid-1, true);
 		else if (key > wordList[mid])	//key higher in dictionary than current word
-			return locateStart(key, mid, high, true);
+			return locateStart(key, mid+1, high, true);
 		else //otherwise key == wordList[mid] and we've found our result
 			result = mid;
 			return result;
@@ -65,25 +64,28 @@ int Dictionary::locateStart(string key, int low, int high, bool exact) {
 		int strLen = key.length();
 		string searchSubstr = wordList[mid].substr(0, strLen);
 		if (key < searchSubstr)
-			return locateStart(key, low, mid, false);
+			return locateStart(key, low, mid-1, false);
 		else if (key > searchSubstr)
-			return locateStart(key, mid, high, false);
+			return locateStart(key, mid+1, high, false);
 		else { //otherwise key == searchSubstr and we've foound a word that starts with key
 			result = mid;
 			return result;
 		} //end of else	
-//	return result;
+	} //end of else
 } //end of locateStart member function
 
+
 /*
- * Begins binary search f dictionary for a string, using overloaded locateStart to do the heavy lifting
- * @param key the string we aare trying to match to a dictionary word
+ * Begins binary search of dictionary for a string, using overloaded locateStart to do the heavy lifting
+ * @param key the string we are trying to match to a dictionary word
  * @param exact boolean flag for whether we're trying to exactly match a word or only find a beginning fragment
  * @returns the index of our desired word in the dictionary. Upon failure, returns -1
  */
 int Dictionary::locateStart(string key, bool exact) {
+	//using this rather than wordListSize b/c want to make sure Dictionary is initialized before calling locateStart:
+	int dictLength = getDictionarySize(); 
 	int result;
-	result = locateStart(key, 0, wordListSize-1, exact);
+	result = locateStart(key, 0, dictLength-1, exact);
 	return result;
 } //end of locateStart member funcion
 
