@@ -16,7 +16,7 @@ int Dictionary::initialize() {
 
 	//Read words in from list, save them to wordList, and save count:
 	string nextWord;
-	while (dictInFileStream >> nextWord) { //TODO: might this give a problem for compound-like words?
+	while (dictInFileStream >> nextWord) { 
 		wordList.push_back(nextWord);
 	} //end of while loop
 	wordListSize = wordList.size();
@@ -53,10 +53,10 @@ int Dictionary::locateStart(string key, int low, int high, bool exact) {
 			return result;
 	} //end of if
 	else { //if we're not looking for an exact match
-		//Want to check if there's something in the dictionary...
-		//...whose first letters match all of key 
-		//NOTE: Isn't the "exact" case just a special case of this? Where length is the same?... 
-		//NO, actually. ex: key = hell, accidentally get "hello" position first, returns that.
+		//Want to check if there exists anything in the dictionary...
+		//...whose first letters match all of key's characters 
+		//Q: Isn't the "exact" case just a special case of this? Where lengths are the same?... 
+		//A: NO, actually. ex: key = "hell". If accidentally get "hello" position first, returns that instead of "hell".
 		if (low > high)
 			return result; //return result failure
 		//Binary Search of just substring:
@@ -67,7 +67,7 @@ int Dictionary::locateStart(string key, int low, int high, bool exact) {
 			return locateStart(key, low, mid-1, false);
 		else if (key > searchSubstr)
 			return locateStart(key, mid+1, high, false);
-		else { //otherwise key == searchSubstr and we've foound a word that starts with key
+		else { //otherwise, (key == searchSubstr), and we've found a word that starts with key
 			result = mid;
 			return result;
 		} //end of else	

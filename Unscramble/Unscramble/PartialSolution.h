@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include "Dictionary.h"
-//#include <iostream>
 
 using std::string;
 using std::vector;

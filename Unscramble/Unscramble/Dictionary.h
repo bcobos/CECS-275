@@ -16,13 +16,12 @@ private:
 	static unsigned int wordListSize;
 
 	//Private Member Functions: 
-	//IS EVERYTHING SUPPOSED TO BE STATIC? (we're never gonna instantiate one). Gonna do it just because it seems right, for now
 	static int locateStart(string, int, int, bool);
 
 public:
 	//Public Member Functions:
 	static int locateStart(string, bool);
 	static int getDictionarySize();
-	static int initialize(); //Should this be private? That would be weird...
+	static int initialize();
 
 }; //end of Dictionary class declarations

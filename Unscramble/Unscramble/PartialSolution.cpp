@@ -52,11 +52,9 @@ int PartialSolution::examine() {
 } //end of examine member function
 
 /**
- * ACTUALLY, don't think I fully understand this function. Come back to.
- * 
- * Searched a vector of previous solutions to make sure...
- * ...we're not trying to find a solution we've already found.
- * Ex: "hel" will show up twice in search for "hello," due to duplicate l's
+ * Keeps a list of full solutions, and searches a vector of previous solutions...
+ * ...to make sure we're not looking for a solution we've already found.
+ * Ex: oklnl => knoll, with no duplicates (from dual l's)
  * @param solutionList a vector with solutions already found
  */
 void PartialSolution::solvePartial(vector<string>& solutionList) {
@@ -65,14 +63,16 @@ void PartialSolution::solvePartial(vector<string>& solutionList) {
 		//Solution is not worth pursuing.
 		return;
 	} else if (status == ACCEPT) {
-		//Done with this full solution
+		//Found this full solution
+		//Check that solution isn't already in the vector:
 		for (string& soln : solutionList) {
 			if (soln == this->unscrambled)
 				return;
 		} //end of range-based for loop
-		//If you didn't return by here, need to add the solution to list.
+		//If you didn't return by here, need to add the solution to list:
 		solutionList.push_back(this->unscrambled);
 	} else if (status == CONTINUE) {
+		//There are words with this partial solition. Continue the search:
 		vector<PartialSolution> extensionVec = this->extend();
 		for (auto& partialSoln : extensionVec) {
 			partialSoln.solvePartial(solutionList);
