@@ -21,6 +21,8 @@ struct Freq {
 			value = 0;
 			frequency = 0;
 		}
+
+		//constructor:
 		Freq(int elements,  int n_elements){
 			value = elements;
 			frequency = n_elements;
