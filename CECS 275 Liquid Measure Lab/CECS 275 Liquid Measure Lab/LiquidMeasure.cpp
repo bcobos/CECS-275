@@ -1,5 +1,30 @@
 #include "LiquidMeasure.h"
 
+// initialize static variable
+int LiquidMeasure::liquidMeasure_track = 0;
+
+ /**
+  * Default Constrcutor 
+  */
+LiquidMeasure::LiquidMeasure() {
+	gallons = 0;
+	quarts = 0;
+	cups = 0;
+	ounces = 0;
+	liquidMeasure_track++;
+} // end of default constructor
+
+/**
+  * Constrcutor
+  */
+LiquidMeasure::LiquidMeasure(int newGallons, int newQuarts, int newCups, int newOunces) {
+	gallons = newGallons;
+	quarts = newQuarts;
+	cups = newCups;
+	ounces = newOunces;
+	liquidMeasure_track++;
+} // end of default constructor
+
  /**
   * Simplifies LiquidMeasure object's current variables to reduced form
   */
@@ -67,13 +92,58 @@ LiquidMeasure LiquidMeasure::operator-(LiquidMeasure other) const {
 	return temp; //BE AWARE THIS USES DEFAULT COPY CONSTRUCTOR
 } //end of operator+ member operator overload
 
+ /**
+  * compare the total volume of liquidMeasure for less than operator
+  * @param other the other LiquidMeasure to compare from this one
+  * @returns true if this LiquidMeasure is less than the other
+  */
+bool LiquidMeasure::operator<(LiquidMeasure other) const {
+	return (this->getOunces() < other.getOunces());
+} // end of < operator
+
+ /**
+  * compare the total volume of liquidMeasure for greater than operator
+  * @param other the other LiquidMeasure to compare from this one
+  * @returns true if this LiquidMeasure is greater than the other
+  */
+bool LiquidMeasure::operator>(LiquidMeasure other) const {
+	return (this->getOunces() > other.getOunces());
+} // end of > operator
+
+/**
+  * compare the total volume of liquidMeasure are equal
+  * @param other the other LiquidMeasure to compare from this one
+  * @returns true if this LiquidMeasure is same as the other
+  */
+bool LiquidMeasure::operator==(LiquidMeasure other) const {
+	return (this->getOunces() == other.getOunces());
+} // end of == operator
+
+/**
+  * compare the total volume of liquidMeasure for less than equal to operator
+  * @param other the other LiquidMeasure to compare from this one
+  * @returns true if this LiquidMeasure is less than the other
+  */
+bool LiquidMeasure::operator<=(LiquidMeasure other) const {
+	return (*this) < other || (*this) == other;
+} // end of <= operator
+
+/**
+  * compare the total volume of liquidMeasure for greater than operator
+  * @param other the other LiquidMeasure to compare from this one
+  * @returns true if this LiquidMeasure is greater than the other
+  */
+bool LiquidMeasure::operator>=(LiquidMeasure other) const {
+	return (*this) > other || (*this) == other;
+} // end of >= operator
+
 /**
  * Type casting from LiquidMeasure to double
  * @returns total number of gallons, as a decimal (double)
  */
 LiquidMeasure::operator double() const {
 	const int OUNCES_PER_GALLON = QUARTS_PER_GALLON * CUPS_PER_QUART * OUNCES_PER_CUP;
-	return getOunces() / OUNCES_PER_GALLON; 
+	return static_cast<double>(getOunces()) / OUNCES_PER_GALLON; 
 } //end of LiquidMeasure to double casting
 
 /**
@@ -86,3 +156,10 @@ LiquidMeasure::operator int() const {
 	//This is easy -- in reduced form, only need to return gallons
 	return gallons;
 } //end of LiquidMeasure to int casting
+
+/**
+ * @returns the Liquid Measure instances counts
+ */
+int LiquidMeasure::getLM() {
+	return liquidMeasure_track;
+} // end of getLM

@@ -13,8 +13,10 @@ using namespace std;
 
 int main() {
 	//Debug code:
-	LiquidMeasure lm1 = LiquidMeasure();
+	LiquidMeasure lm1 = LiquidMeasure(0, 0, 0, 0);
 	
 	cout << "Completed Satisfactorily." << endl;
+
+	//TODO: comment out when turning it in
 	system("PAUSE");
 } //end of main

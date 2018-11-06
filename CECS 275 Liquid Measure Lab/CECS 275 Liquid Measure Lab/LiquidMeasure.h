@@ -12,19 +12,37 @@ const int OUNCES_PER_CUP = 8;
 
 class LiquidMeasure {
 private:
+	//Member variables:
 	int gallons;
 	int quarts;
 	int cups;
 	int ounces;
-	void simplify();
+	static int liquidMeasure_track;
 
+	//Member functions:
+	void simplify();
+	
 public:
+
+	// constructor
+	LiquidMeasure(int, int, int, int);
+
+	// default constructor
+	LiquidMeasure();
+
+	// Member Functions
+	static int getLM();
 	int getOunces() const;
 	string to_string() const;
 
 	//Operator overloading:
 	LiquidMeasure operator+(LiquidMeasure) const;
 	LiquidMeasure operator-(LiquidMeasure) const;
+	bool operator<(LiquidMeasure) const;
+	bool operator>(LiquidMeasure) const;
+	bool operator==(LiquidMeasure) const;
+	bool operator<=(LiquidMeasure) const;
+	bool operator>=(LiquidMeasure) const;
 
 	//Casting: 
 	//note: const at the end says, "don't modify the contents of the (LiquidMeasure) object this function is a member of"
