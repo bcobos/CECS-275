@@ -1,4 +1,11 @@
 #pragma once
+/**
+* @authors Bernardo Cobos, Dong Jae Shin
+* @date Started 11/1/18; Due 11/6/18
+* This program overloads operators to give a simple interface for computing Imperial Liquid Measures
+* Input: None
+* Output: Simulation of use of LiquidMeasure for a camping trip
+*/
 
 #include <string>
 #include <sstream>
@@ -49,9 +56,7 @@ public:
 	bool operator==(LiquidMeasure) const;
 	bool operator<=(LiquidMeasure) const;
 	bool operator>=(LiquidMeasure) const;
-
-	// calls the copy constructor... do not have to be redundant
-	//LiquidMeasure operator=(LiquidMeasure) const;
+	LiquidMeasure& operator=(const LiquidMeasure&);
 
 	//Casting: 
 	//note: const at the end says, "don't modify the contents of the (LiquidMeasure) object this function is a member of"

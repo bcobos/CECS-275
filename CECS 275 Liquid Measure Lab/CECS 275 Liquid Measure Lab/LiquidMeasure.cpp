@@ -1,10 +1,18 @@
+/**
+* @authors Bernardo Cobos, Dong Jae Shin
+* @date Started 11/1/18; Due 11/6/18
+* This program overloads operators to give a simple interface for computing Imperial Liquid Measures
+* Input: None
+* Output: Simulation of use of LiquidMeasure for a camping trip
+*/
+
 #include "LiquidMeasure.h"
 
 // initialize static variable
 int LiquidMeasure::liquidMeasure_track = 0;
 
  /**
-  * Default Constrcutor 
+  * Default Constructor 
   */
 LiquidMeasure::LiquidMeasure() {
 	gallons = 0;
@@ -15,7 +23,7 @@ LiquidMeasure::LiquidMeasure() {
 } // end of default constructor
 
 /**
-  * Constrcutor
+  * Standard constructor
   */
 LiquidMeasure::LiquidMeasure(int newGallons, int newQuarts, int newCups, int newOunces) {
 	gallons = newGallons;
@@ -26,14 +34,7 @@ LiquidMeasure::LiquidMeasure(int newGallons, int newQuarts, int newCups, int new
 } // end of default constructor
 
 /**
-  * Destrcutor
-  */
-LiquidMeasure::~LiquidMeasure() {
-	liquidMeasure_track--;
-} // end of default destructor
-
-/**
-  * Copy Constrcutor
+  * Copy Constructor
   */
 LiquidMeasure::LiquidMeasure(const LiquidMeasure & other) {
 	gallons = other.gallons;
@@ -42,6 +43,13 @@ LiquidMeasure::LiquidMeasure(const LiquidMeasure & other) {
 	ounces = other.ounces;
 	liquidMeasure_track++;
 } // end of copy constructor
+
+  /**
+  * Destructor
+  */
+LiquidMeasure::~LiquidMeasure() {
+	liquidMeasure_track--;
+} // end of default destructor
 
  /**
   * Simplifies LiquidMeasure object's current variables to reduced form
@@ -102,12 +110,30 @@ LiquidMeasure LiquidMeasure::operator+(LiquidMeasure other) const {
   */
 LiquidMeasure LiquidMeasure::operator-(LiquidMeasure other) const {
 	LiquidMeasure temp = LiquidMeasure();
-	temp.gallons = this->gallons - other.gallons;
-	temp.quarts = this->quarts - other.quarts;
-	temp.cups = this->cups - other.cups;
 	temp.ounces = this->ounces - other.ounces;
+	temp.cups = this->cups - other.cups;
+	temp.quarts = this->quarts - other.quarts;
+	temp.gallons = this->gallons - other.gallons;
+
+	//Ensuring we're still in proper format:
+	if (temp.ounces < 0) { //Borrowing from "cups place"
+		temp.cups -= 1; //take off a cup
+		temp.ounces += OUNCES_PER_CUP; //go up a cup (in ounces, though)
+	} //end of if
+	if (temp.cups < 0) { //Borrowing from "quarts place"
+		temp.quarts -= 1; //take off a quart
+		temp.cups += CUPS_PER_QUART; //go up a quart (in cups, though)
+	} //end of if
+	if (temp.quarts < 0) { //Borrowing from "cups place"
+		temp.gallons -= 1; //take off a gallon
+		temp.quarts += QUARTS_PER_GALLON; //go up a gallon (in quarts, though)
+	} //end of if
+	//NOTE: Ideally, here would also be a check to verify that gallons is still positive at this point
+	//we can't have negative volumes, so this would throw an exception
+	//This project won't get into that.
+
 	temp.simplify();
-	return temp; //BE AWARE THIS USES DEFAULT COPY CONSTRUCTOR
+	return temp;
 } //end of operator+ member operator overload
 
  /**
@@ -156,24 +182,6 @@ bool LiquidMeasure::operator>=(LiquidMeasure other) const {
 } // end of >= operator
 
 /**
-  * set the other LiquidMeasure to this LquidMeasure
-  * @param other the other LiquidMeasure to set this LiquidMeasure
-  * @returns other 
-  */
-/*
-LiquidMeasure LiquidMeasure::operator=(LiquidMeasure other) const {
-	//this->gallons = other.gallons;
-	//this->quarts = other.quarts;
-	//this->cups = other.cups;
-	//this->ounces = other.ounces;
-	//liquidMeasure_track++;
-
-	return LiquidMeasure(other.gallons, other.quarts, other.cups, other.ounces);
-	//return other;
-	//LiquidMeasure(other);
-} // end of = operator
-*/
-/**
  * Type casting from LiquidMeasure to double
  * @returns total number of gallons, as a decimal (double)
  */
@@ -199,3 +207,25 @@ LiquidMeasure::operator int() const {
 int LiquidMeasure::getLM() {
 	return liquidMeasure_track;
 } // end of getLM
+
+/**
+  * set the other LiquidMeasure to this LiquidMeasure
+  * @param other the other LiquidMeasure to set this LiquidMeasure
+  * @returns other
+  */  
+LiquidMeasure& LiquidMeasure::operator=(const LiquidMeasure& other)  {
+	//defending against self-assignment:
+	if (this == &other) 
+		return *this;
+	
+	//Otherwise, normal copy:
+	//(Note this shouldn't use copy constructor)
+	//Copy:
+	gallons = other.gallons;
+	quarts = other.quarts;
+	cups = other.cups;
+	ounces = other.ounces;
+
+	//rerurn the existing copy, so we can chain
+	return (*this);
+} // end of = operator
