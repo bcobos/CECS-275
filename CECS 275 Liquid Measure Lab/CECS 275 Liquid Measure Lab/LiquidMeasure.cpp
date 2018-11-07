@@ -25,6 +25,24 @@ LiquidMeasure::LiquidMeasure(int newGallons, int newQuarts, int newCups, int new
 	liquidMeasure_track++;
 } // end of default constructor
 
+/**
+  * Destrcutor
+  */
+LiquidMeasure::~LiquidMeasure() {
+	liquidMeasure_track--;
+} // end of default destructor
+
+/**
+  * Copy Constrcutor
+  */
+LiquidMeasure::LiquidMeasure(const LiquidMeasure & other) {
+	gallons = other.gallons;
+	quarts = other.quarts;
+	cups = other.cups;
+	ounces = other.ounces;
+	liquidMeasure_track++;
+} // end of copy constructor
+
  /**
   * Simplifies LiquidMeasure object's current variables to reduced form
   */
@@ -142,10 +160,19 @@ bool LiquidMeasure::operator>=(LiquidMeasure other) const {
   * @param other the other LiquidMeasure to set this LiquidMeasure
   * @returns other 
   */
+/*
 LiquidMeasure LiquidMeasure::operator=(LiquidMeasure other) const {
-	return other;
-} // end of = operator
+	//this->gallons = other.gallons;
+	//this->quarts = other.quarts;
+	//this->cups = other.cups;
+	//this->ounces = other.ounces;
+	//liquidMeasure_track++;
 
+	return LiquidMeasure(other.gallons, other.quarts, other.cups, other.ounces);
+	//return other;
+	//LiquidMeasure(other);
+} // end of = operator
+*/
 /**
  * Type casting from LiquidMeasure to double
  * @returns total number of gallons, as a decimal (double)

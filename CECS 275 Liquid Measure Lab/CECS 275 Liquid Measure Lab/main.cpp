@@ -36,24 +36,68 @@ int main() {
 
 	// 5 gallon container has no water in it
 	LiquidMeasure container_5_gal = LiquidMeasure(0, 0, 0, 0);
+
+	const int FIVEGALLON_TO_OUNCES = 5 * QUARTS_PER_GALLON * CUPS_PER_QUART * OUNCES_PER_CUP;
 	cout << "We have: " << LiquidMeasure::getLM() << " defined." << endl;
-	// display the empty container
-	cout << "Container at camp currently has: " << endl << container_5_gal.to_string();
 	
-	// me and my friend's first trip
-	container_5_gal = lm1 + lm2 + lm3;
+	// trip counter
+	int trips = 0;
 
-	// display the content after first trip
-	cout << "after the first trip: \n" << container_5_gal.to_string(); 
+	do {
+		// update the trip counter
+		trips++;
 
-	cout << "five gallon container has: " << container_5_gal.getOunces() << " ounces in it." << endl;
+		bool iCanGoAlone = true;
+
+		// use all measurement cups only if it does not add up to 5 gallons
+		// only use the measuring cups that are needed that will get the 5 gallon up to the limit
+		if (FIVEGALLON_TO_OUNCES >= (container_5_gal + lm1 + lm2 + lm3).getOunces()) {
+			container_5_gal = container_5_gal + lm1 + lm2 + lm3;
+			iCanGoAlone = false;
+		}
+		else if (FIVEGALLON_TO_OUNCES >= (container_5_gal + lm1 + lm2).getOunces()) {
+			container_5_gal = container_5_gal + lm1 + lm2;
+		}
+		else if (FIVEGALLON_TO_OUNCES >= (container_5_gal + lm1 + lm3).getOunces()) {
+			container_5_gal = container_5_gal + lm1 + lm3;
+		}
+		else if (FIVEGALLON_TO_OUNCES >= (container_5_gal + lm2 + lm3).getOunces()) {
+			container_5_gal = container_5_gal + lm2 + lm3;
+		}
+		else if (FIVEGALLON_TO_OUNCES >= (container_5_gal + lm1).getOunces()) {
+			container_5_gal = container_5_gal + lm1;
+		}
+		else if (FIVEGALLON_TO_OUNCES >= (container_5_gal + lm2).getOunces()) {
+			container_5_gal = container_5_gal + lm2;
+		}
+		else if (FIVEGALLON_TO_OUNCES >= (container_5_gal + lm3).getOunces()) {
+			container_5_gal = container_5_gal + lm3;
+		}
+
+		// display the container at the camp
+		cout << "Container at camp currently has: " << endl << container_5_gal.to_string();
+
+		// if only two or one cups are needed go alone
+		if (iCanGoAlone) {
+			cout << "I can go alone for this trip!" << endl;
+		}
+
+		// display the content after every trips
+		cout << "after the " << trips << " trip: \n";
+		cout << "five gallon container has " << container_5_gal.getOunces() << " ounces in it." << endl;
 
 
-	// display the defined measurement.
-	cout << container_5_gal.to_string();
+
+	// loop until it reaches 5 gallons
+	} while (container_5_gal.getOunces() < FIVEGALLON_TO_OUNCES);
+
+	cout << "filled the 5 gallon after " << trips << " trips " << endl;
+	cout << "Container at camp currently has: " << endl << container_5_gal.to_string();
+
 
 	cout << "Completed Satisfactorily." << endl;
 
 	//TODO: comment out when turning it in
 	system("PAUSE");
+
 } //end of main

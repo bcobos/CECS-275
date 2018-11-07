@@ -24,11 +24,17 @@ private:
 	
 public:
 
+	// copy constructor
+	LiquidMeasure(const LiquidMeasure &);
+
 	// constructor
 	LiquidMeasure(int, int, int, int);
 
 	// default constructor
 	LiquidMeasure();
+
+	// destructor
+	~LiquidMeasure();
 
 	// Member Functions
 	static int getLM();
@@ -43,7 +49,9 @@ public:
 	bool operator==(LiquidMeasure) const;
 	bool operator<=(LiquidMeasure) const;
 	bool operator>=(LiquidMeasure) const;
-	LiquidMeasure operator=(LiquidMeasure) const;
+
+	// calls the copy constructor... do not have to be redundant
+	//LiquidMeasure operator=(LiquidMeasure) const;
 
 	//Casting: 
 	//note: const at the end says, "don't modify the contents of the (LiquidMeasure) object this function is a member of"
