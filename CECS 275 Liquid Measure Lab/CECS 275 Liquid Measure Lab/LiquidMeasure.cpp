@@ -44,10 +44,10 @@ void LiquidMeasure::simplify() {
  */
 string LiquidMeasure::to_string() const {
 	std::stringstream strStream;
-	strStream << std::setw(10) << "Gallons: " << gallons << std::endl;
-	strStream << std::setw(10) << "Quarts: " << quarts << std::endl;
-	strStream << std::setw(10) << "Cups: " << cups << std::endl;
-	strStream << std::setw(10) << "Ounces: " << ounces << std::endl;
+	strStream << std::left << std::setw(10) << "Gallons: " << gallons << std::endl;
+	strStream << std::left << std::setw(10) << "Quarts: " << quarts << std::endl;
+	strStream << std::left << std::setw(10) << "Cups: " << cups << std::endl;
+	strStream << std::left << std::setw(10) << "Ounces: " << ounces << std::endl;
 	return strStream.str();
 } //end of to_string member function
 
@@ -136,6 +136,15 @@ bool LiquidMeasure::operator<=(LiquidMeasure other) const {
 bool LiquidMeasure::operator>=(LiquidMeasure other) const {
 	return (*this) > other || (*this) == other;
 } // end of >= operator
+
+/**
+  * set the other LiquidMeasure to this LquidMeasure
+  * @param other the other LiquidMeasure to set this LiquidMeasure
+  * @returns other 
+  */
+LiquidMeasure LiquidMeasure::operator=(LiquidMeasure other) const {
+	return other;
+} // end of = operator
 
 /**
  * Type casting from LiquidMeasure to double

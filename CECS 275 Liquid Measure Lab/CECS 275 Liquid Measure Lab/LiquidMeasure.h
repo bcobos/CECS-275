@@ -43,6 +43,7 @@ public:
 	bool operator==(LiquidMeasure) const;
 	bool operator<=(LiquidMeasure) const;
 	bool operator>=(LiquidMeasure) const;
+	LiquidMeasure operator=(LiquidMeasure) const;
 
 	//Casting: 
 	//note: const at the end says, "don't modify the contents of the (LiquidMeasure) object this function is a member of"
