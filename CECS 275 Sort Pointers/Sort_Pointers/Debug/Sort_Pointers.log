@@ -1,0 +1,2 @@
+﻿  main.cpp
+c:\users\chris\source\repos\sort_pointers\sort_pointers\main.cpp(60): error C4716: 'arrQuickSort': must return a value
