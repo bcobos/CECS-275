@@ -8,10 +8,14 @@ using std::string;
 class Person
 {
 private:
+	// member variable
 	string lName;
 	string fName;
 	int h_feet;
 	int h_inch;
+
+	// fuction pointer
+	int(Person::*compFunc)(Person);
 
 	int person_counter;
 
@@ -44,6 +48,14 @@ public:
 	int compFullName(Person);
 	int compHeight(Person);
 
+	//////////////////////
+	// Function Pointer //
+	//////////////////////
+
+	void setCompFunc(int (Person:: *newCompFunc)(Person));
+	int compare(Person other);
+
+	Person& Person::operator=(const Person& other);
 	// to_string
 	void to_string() const;
 

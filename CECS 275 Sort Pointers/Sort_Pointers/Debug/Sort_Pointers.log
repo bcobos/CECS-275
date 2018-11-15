@@ -1,2 +1,4 @@
 ﻿  main.cpp
-c:\users\chris\source\repos\sort_pointers\sort_pointers\main.cpp(60): error C4716: 'arrQuickSort': must return a value
+  Person.cpp
+  Generating Code...
+c:\users\chris\source\repos\cecs 275 sort pointers\sort_pointers\main.cpp(60): error C4716: 'arrQuickSort': must return a value

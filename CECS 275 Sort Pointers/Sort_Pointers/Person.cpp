@@ -24,6 +24,18 @@ Person::Person(string newLName, string newFName, int newHFeet, int newHInch) {
 	person_counter++;
 } //  end of full constructor
 
+Person& Person::operator=(const Person& other) {
+	//defending against self-assignment:
+	if (this == &other)
+		return *this;
+
+	lName = other.lName;
+	fName = other.fName;
+	h_feet = other.h_feet;
+	h_inch = other.h_inch;
+	
+	return(*this);
+}
 /**
  * @returns the last name of the person implicitly called
  */
@@ -156,3 +168,19 @@ Person::~Person()
 {
 	person_counter--;
 } // end of destructor
+
+/**
+ * sets the pointer to the function
+ */
+void Person::setCompFunc(int (Person::*newCompFunc)(Person)) {
+	this->compFunc = newCompFunc;
+} // end of function setCompFunct
+
+/**
+ * call the pointed function
+ * @param other the other Person to compare
+ * @returns according to the function pointed
+ */
+int Person::compare(Person other) {
+	return (this->*compFunc)(other);
+}// end of function compare
