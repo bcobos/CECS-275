@@ -44,23 +44,26 @@ int main() {
 	stringContainer.add(str4);
 	cout << "Added Element." << endl;
 	cout << "String object now has " << stringContainer.getNumElements()
-		<< " items, and its current capacity is " << stringContainer.getSize() << endl;
+		<< " items, and its current capacity is " << stringContainer.getSize() << endl << endl;
 
 	//Retrieve each element using for loop and operator []
 	//Also try to access an out-of-bound element at the end and handle the thrown exception
+	cout << "The contents of the String array are as follow: " << endl;
 	int numElements = stringContainer.getNumElements();
 	for (int i = 0; i <= numElements; ++i) { //NOTE this tries to access all the way up TO numElements
 		try {
-			cout << stringContainer[i] << endl;
+			cout << "Element " << i+1 << ": \"" << stringContainer[i] << "\"" << endl;
 		} catch (String::IndexOutOfBoundsException exceptionObject) {
 			cout << exceptionObject.getMessage() << endl;
 			cout << "Attempted to access element at index " << exceptionObject.getIndex() << endl;
 		} //end of try/catch block
 	} //end of for loop
+	cout << endl;
 
 	//Attempt to create a new String instance, but with -5 elements in it:
+	cout << "Attempting to create a new String with a negative number of elements: " << endl;
 	try {
-		String stringContBad = String(-1);
+		String stringContBad = String(-5);
 	} catch (String::IndexOutOfBoundsException exc) {
 		cout << exc.getMessage() << endl;
 		cout << "Attempted to create String with array of size " << exc.getIndex() << endl;
