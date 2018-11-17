@@ -1,4 +1,11 @@
 #pragma once
+/**
+* @authors Bernardo Cobos, Dong Jae Shin
+* @date 11/15/18
+* This program is practice with operator overloading, memory management, and exception handling
+* Input: None
+* Output: Result of adding to a container object and of playing with exceptions
+*/
 
 #include <string>
 #include <iostream>

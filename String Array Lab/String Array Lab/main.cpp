@@ -72,5 +72,5 @@ int main() {
 	cout << "Completed successfully." << endl;
 
 	//TODO: delete
-	system("PAUSE");
+//	system("PAUSE");
 } //end of main

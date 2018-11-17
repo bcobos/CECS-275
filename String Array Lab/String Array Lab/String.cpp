@@ -1,4 +1,11 @@
 #include "String.h"
+/**
+* @authors Bernardo Cobos, Dong Jae Shin
+* @date 11/15/18
+* This program is practice with operator overloading, memory management, and exception handling
+* Input: None
+* Output: Result of adding to a container object and of playing with exceptions
+*/
 
 ///////////STRING CONSTRUCTORS////////////////
 
@@ -102,12 +109,9 @@ void String::resizeIfNecessary() {
 //		std::cout << "new array address: " << newArray << "|| current array address: " << *strArrPtr << std::endl;
 
 		//DELETE THE FREAKING MEMORY FROM OLD ARRAY FIRST BEWARE OF MEMORY LEAKS
-//		delete[](*strArrPtr); //TODO: This is causing a problem. ...@$#@$ WHY THE FUCK!?
-
-//Attempt #1000: "Desperation"
-//		for (int i = 0; i < oldArraySize; ++i) {
-//			delete (*strArrPtr + i);
-//		}
+		if (oldArraySize != 0) {
+			delete[](*strArrPtr); 
+		} //end of if
 
 		//set strArr member array to the new array
 		*strArrPtr = newArray;
