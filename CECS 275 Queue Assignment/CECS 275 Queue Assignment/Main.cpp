@@ -15,42 +15,44 @@ int main() {
 	//Driver assignment:
 	//1) Create and show the original queue
 	Queue queue;
-	queue.add(string("Boris Karloff"));
+	queue.add("Boris Karloff");
 	queue.add("Harrison Ford");
 	queue.add("Muhatma Ghandi");
 	queue.add("Vincent Price");
 	queue.add("Diane Keaton");
 	cout << "1) Line before we get there: " << endl;
+
 	//Reset iterator
 	queue.peekReset();
+	
+	//cout << queue.to_string() << endl;
+	
 	//Iterate through all elements until end is reached
 	while (queue.peekHasNext()) {
 		//Print current element
-		cout << queue.peek() << endl;
-		//Update iterator
-		queue.peekNext();
+		cout << queue.peekNext() << endl;
+		//cout << queue.to_string() << endl;
 	} //end of while
 	cout << endl;
 	//This is quite a roster.
-
+	
 	//2) Add our group to the queue, and show it
 	queue.add("Bernardo Cobos");
 	queue.add("Chris Dong Jae Shin");
 	queue.add("Vinh");
 	queue.add("Dave Brown");
 	queue.add("Peter Parker");
+
 	cout << "2) After my friends and I arrive: " << endl;
 	//Reset iterator
 	queue.peekReset();
 	//Iterate through all elements until end is reached
 	while (queue.peekHasNext()) {
 		//Print current element
-		cout << queue.peek() << endl;
-		//Update iterator
-		queue.peekNext();
+		cout << queue.peekNext() << endl;
 	} //end of while
 	cout << endl;
-
+	/*
 	//3) Clerk-bro comes out and takes note of the queue
 	Queue queueRecord = Queue(queue);
 	cout << "3) Store Clerk has recorded the current queue. " << endl;
@@ -90,7 +92,7 @@ int main() {
 	//Then we could do something like:
 	//while (!queue.isEmpty()) { }
 	cout << endl;
-
+	*/
 	cout << "Completed Successfully." << endl;
 
 	//TODO: comment out this line before turning in.

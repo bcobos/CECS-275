@@ -1,10 +1,10 @@
 #include "Queue.h"
-
+#include <sstream>
 /**
 * If queue capacity is reached, doubles the available space
 */
 void Queue::growBufferIfNecessary() {
-
+	
 	// update to newSize
 	int newSize = currentSize * 2;
 
@@ -15,15 +15,19 @@ void Queue::growBufferIfNecessary() {
 	for (int i = 0; i < currentSize; ++i) {
 		tempBuffer[i] = buffer[(head + i) % currentSize];
 	} // end of for loop
-	
+
+	head = 0;
+	tail = currentSize;
+
 	// get rid of the content of the buffer
-	delete buffer;
+	delete [] buffer;
 
 	// relocate the tempbuffer to buffer
+	buffer = new string[newSize];
 	buffer = tempBuffer;
 
 	// get rid of the content of the temp buffer
-	delete tempBuffer;
+	delete [] tempBuffer;
 
 	// update the size
 	currentSize = newSize;
@@ -38,7 +42,7 @@ Queue::Queue() {
 	buffer = new string[10]; 
 	head = 0;
 	tail = 0;
-	capacity = 0;
+	capacity = 10;
 	currentSize = 0;
 	currentPeek = 0;
 
@@ -54,7 +58,7 @@ Queue::Queue(int newSize) {
 	buffer = new string[newSize];
 	head = 0;
 	tail = 0;
-	capacity = 0;
+	capacity = newSize;
 	currentSize = 0;
 	currentPeek = 0;
 
@@ -81,7 +85,7 @@ Queue::~Queue() {
 	// re-create the dynamic allocation 
 	buffer = new string;
 	// delete the pointer
-	delete buffer;
+	delete [] buffer;
 	// re-locate the left over pointer to null pointer
 	buffer = nullptr;
 } //end of Queue destructor
@@ -97,8 +101,8 @@ void Queue::add(string newString) {
 	// because as the contents that are added are declared on the next tail
 	// instead of current tail.
 	// refrence is in the requirement table (check push 5, ie second row of operation)
-
-	if (++tail % capacity == 0) {
+	int tempNextTail = tail + 1;
+	if (tempNextTail % capacity == 0) {
 		tail = 0;
 	} else {
 		++tail;
@@ -114,6 +118,11 @@ void Queue::add(string newString) {
 	if (currentSize < capacity) {
 		++currentSize;
 	} // end of if
+
+	// grow buffer if all the queue is filled up
+	if (currentSize == capacity) {
+		growBufferIfNecessary();
+	}
 } //end of add member function
 
 /**
@@ -163,15 +172,22 @@ string Queue::peek() {
 } //end of peek Queue member function
 
 
-// NOTE TO BERNARDO:
-// I just made peek increment, because I think it is a better way of coding
-// instead of creating the peekNext
+
 /**
-* Increments the peek value
-*/
-void Queue::peekInc() {
-	++currentPeek;
-} //end of peekInc Queue member function
+ * display the content of the class
+ */
+string Queue::to_string()
+{
+	std::stringstream sstream;
+	sstream << "head: " << head << std::endl;
+	sstream << "tail: " << tail << std::endl;
+	sstream << "capacity: " << capacity << std::endl;
+	sstream << "currentSize: " << currentSize << std::endl;
+	sstream << "currentPeek: " << currentPeek << std::endl;
+
+
+	return sstream.str();
+}
 
 
 /**
@@ -191,17 +207,25 @@ bool Queue::peekHasNext() {
 	// if tail - head is positive the peek value will increment
 	// if tail - head is positive the peek value will decrement
 	// if the head and tail are the same value there is no next peek
-	int checkNext = tail - head;
-	
-	// if checkNext is positive peek value will increment to check with tail
-	if (checkNext > 0) {
-		// if the nextpeek value is less than or equal to tail there is a peek value
-		if (currentPeek + 1 <= tail) next = true;
-	} else if (checkNext < 0) { // if checkNext is negative peek value will decrement to check with tail
-		// if the nextpeek value is greater than or equal to tail there is a peek value
-		if (currentPeek - 1 >= tail) next = true;
-	}
+	//int checkNext = tail - head;
 
+	// check if all the queue is filled up
+	if (currentSize == capacity) {
+		// there is always a next.
+		next = true;
+	} else {
+		
+		// update current peek
+		//++currentPeek;
+		// does not need to update current peek.
+		// only has to check if there is next peek available.
+
+		// if the next peek is less than the tail, there is next
+		if (currentPeek + 1 <= tail) {
+			
+			next = true;
+		}
+	}
 	return next;
 
 } //end of Queue peekHasNext member function

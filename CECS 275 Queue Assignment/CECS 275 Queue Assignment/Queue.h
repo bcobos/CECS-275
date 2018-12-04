@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-
+#include <iostream>
 using std::string;
 
 class Queue {
@@ -24,7 +24,9 @@ public:
 	void add(string);
 	string remove();
 	string peek();
-	void peekInc();
+
+	string to_string();
+
 	//"Iterator" functions:
 	void peekReset();
 	bool peekHasNext();
