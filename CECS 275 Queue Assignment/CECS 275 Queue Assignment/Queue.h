@@ -24,6 +24,7 @@ public:
 	void add(string);
 	string remove();
 	string peek();
+	void peekInc();
 	//"Iterator" functions:
 	void peekReset();
 	bool peekHasNext();

@@ -6,6 +6,7 @@
 * Output: ...
 */
 #include <iostream>
+#include <string>
 #include "Queue.h"
 
 using namespace std;
@@ -14,7 +15,7 @@ int main() {
 	//Driver assignment:
 	//1) Create and show the original queue
 	Queue queue;
-	queue.add("Boris Karloff");
+	queue.add(string("Boris Karloff"));
 	queue.add("Harrison Ford");
 	queue.add("Muhatma Ghandi");
 	queue.add("Vincent Price");
