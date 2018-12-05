@@ -1,10 +1,18 @@
 #pragma once
+/**
+* @authors Bernardo Cobos, Dong Jae Shin
+* @date due 12/6/2018
+* This program is practice in the Queue ADT
+* Input: None
+* Output: Effects of manipulating a queue data structure in a simulation of life
+*/
 #include <string>
 #include <iostream>
 using std::string;
 
 class Queue {
 private:
+	bool queueAvailable; //boolean for whether we can add new strings to the queue
 	string* buffer; //pointer to array 
 	unsigned int head; //buffer index front of queue
 	unsigned int tail; //buffer index back of queue
@@ -26,15 +34,13 @@ public:
 	string peek();
 
 	string to_string();
+	void closeQueue();
+	bool getQueueAvailability();
 
 	//"Iterator" functions:
 	void peekReset();
 	bool peekHasNext();
 	string peekNext();
-	//TODO: Exception class:
-	//(we still need to create functionality for how it would be used)
-	//note this may involve the creation of a boolean value indicating whether the queue is available to add to
-	//then we'd also need getter/setter for that variable...
 	class FilledException {
 	private:
 		string nameOfOffender;

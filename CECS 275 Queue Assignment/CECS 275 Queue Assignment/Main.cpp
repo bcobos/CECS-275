@@ -2,8 +2,8 @@
 * @authors Bernardo Cobos, Dong Jae Shin
 * @date due 12/6/2018
 * This program is practice in the Queue ADT
-* Input: ...
-* Output: ...
+* Input: None
+* Output: Effects of manipulating a queue data structure in a simulation of life
 */
 #include <iostream>
 #include <string>
@@ -50,18 +50,21 @@ int main() {
 	while (queue.peekHasNext()) {
 		//Print current element
 		cout << queue.peekNext() << endl;
+		//cout << queue.to_string() << endl;
 	} //end of while
 	cout << endl;
-	/*
+	
 	//3) Clerk-bro comes out and takes note of the queue
 	Queue queueRecord = Queue(queue);
 	cout << "3) Store Clerk has recorded the current queue. " << endl;
 	cout << endl;
-
+	
 	//4) Clerk-bro issues his warning:
 	cout << "4) The queue is now closed. " << endl;
-	//TODO: declare the queue closed once that functionality is added to Queue class
-
+	queueRecord.closeQueue();
+	queue.closeQueue();
+	cout << endl;
+	
 	//5) Two scumbags try to enter the queue
 	cout << "5) " << endl;
 	cout << "Mr. Rogers attempts to enter the queue... " << endl;
@@ -72,20 +75,25 @@ int main() {
 		cout << "The clerk declares: \"You're out of line, " << exc.getName() << "!\"" << endl;
 		cout << "(the pun was intentional)" << endl;
 	} //end of catch
+	cout << endl;
 	cout << "Dr. Seuss attempts to enter the queue. " << endl;
 	try {
 		queue.add("Theodore Seuss Geisel");
 	} //end of try
 	catch (Queue::FilledException e) {
-		cout << "There's no space for you here, " << e.getName() << "." << endl;
+		cout << "The clerk screams: \"There's no space for you here, " << e.getName() << "!\"" << endl;
 	} //end of catch
 	cout << endl;
-
+	
 	//6) Clerk-bro checks on the line every few minutes:
 	cout << "6) The store clerk checks the line every few minutes..." << endl;
-	//TODO: What's actually being asked for here?
+	//What's actually being asked for here?
+	if (queueRecord.peek() == queue.peek()) //TODO ERROR peek() seems to only give empty strings...
+		cout << "Store clerk checks the line and sees that " << queue.peek() << " is still at the head of the line." << endl;
+	else
+		cout << "Store clerk freaks out as he realizes " << queueRecord.peek() << " has left the line!! " << endl;
 	cout << endl;
-
+	/*
 	//7) Everyone gets a phone, in the order that they are in line.
 	cout << "7) The store clerk begins to sell the phones to the queue in the proper order. " << endl;
 	//TODO: maybe we should add a Queue::isEmpty() function to make this part easier...
