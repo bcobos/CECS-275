@@ -12,28 +12,16 @@
 using namespace std;
 
 int main() {
-	//Driver assignment:
 	//1) Create and show the original queue
 	Queue queue;
+//	Queue queue = Queue(1); //An alternative start.
 	queue.add("Boris Karloff");
 	queue.add("Harrison Ford");
 	queue.add("Muhatma Ghandi");
 	queue.add("Vincent Price");
 	queue.add("Diane Keaton");
 	cout << "1) Line before we get there: " << endl;
-
-	//Reset iterator
-	queue.peekReset();
-	
-	//cout << queue.to_string() << endl;
-	
-	//Iterate through all elements until end is reached
-	while (queue.peekHasNext()) {
-		//Print current element
-		cout << queue.peekNext() << endl;
-		//cout << queue.to_string() << endl;
-	} //end of while
-	cout << endl;
+	cout << queue.to_string() << endl;	
 	//This is quite a roster.
 	
 	//2) Add our group to the queue, and show it
@@ -44,18 +32,10 @@ int main() {
 	queue.add("Peter Parker");
 
 	cout << "2) After my friends and I arrive: " << endl;
-	//Reset iterator
-	queue.peekReset();
-	//Iterate through all elements until end is reached
-	while (queue.peekHasNext()) {
-		//Print current element
-		cout << queue.peekNext() << endl;
-		//cout << queue.to_string() << endl;
-	} //end of while
-	cout << endl;
+	cout << queue.to_string() << endl;
 	
 	//3) Clerk-bro comes out and takes note of the queue
-	Queue queueRecord = Queue(queue);
+	Queue queueRecord = Queue(queue); //make a copy using copy constructor
 	cout << "3) Store Clerk has recorded the current queue. " << endl;
 	cout << endl;
 	
@@ -65,9 +45,9 @@ int main() {
 	queue.closeQueue();
 	cout << endl;
 	
-	//5) Two scumbags try to enter the queue
+	//5) Two scumbags try to enter the queue...
 	cout << "5) " << endl;
-	cout << "Mr. Rogers attempts to enter the queue... " << endl;
+	cout << "Mr. Rogers attempts to enter the line... " << endl;
 	try {
 		queue.add("Fred Rogers");
 	} //end of try
@@ -76,7 +56,7 @@ int main() {
 		cout << "(the pun was intentional)" << endl;
 	} //end of catch
 	cout << endl;
-	cout << "Dr. Seuss attempts to enter the queue. " << endl;
+	cout << "Dr. Seuss attempts to enter the queue... " << endl;
 	try {
 		queue.add("Theodore Seuss Geisel");
 	} //end of try
@@ -88,21 +68,28 @@ int main() {
 	//6) Clerk-bro checks on the line every few minutes:
 	cout << "6) The store clerk checks the line every few minutes..." << endl;
 	//What's actually being asked for here?
-	if (queueRecord.peek() == queue.peek()) //TODO ERROR peek() seems to only give empty strings...
-		cout << "Store clerk checks the line and sees that " << queue.peek() << " is still at the head of the line." << endl;
-	else
-		cout << "Store clerk freaks out as he realizes " << queueRecord.peek() << " has left the line!! " << endl;
+	for (int i = 0; i < 3; ++i) {
+		if (queueRecord.peek() == queue.peek()) 
+			cout << "Store clerk checks the line and sees that " 
+			<< queue.peek() << " is still at the head of the line." << endl;
+		else
+			cout << "Store clerk freaks out as he realizes " 
+			<< queueRecord.peek() << " has left the line!! " << endl;
+//		sleep(200);
+	} //end of for loop
 	cout << endl;
-	/*
+	
 	//7) Everyone gets a phone, in the order that they are in line.
 	cout << "7) The store clerk begins to sell the phones to the queue in the proper order. " << endl;
-	//TODO: maybe we should add a Queue::isEmpty() function to make this part easier...
-	//Then we could do something like:
-	//while (!queue.isEmpty()) { }
+	while (!queue.isEmpty()) { 
+		string person = queue.remove();
+		cout << person << " has bought an iPhone and has now left the line. " << endl;
+	} //end of while loop
+	cout << "The queue is now empty. " << endl;
 	cout << endl;
-	*/
+	
 	cout << "Completed Successfully." << endl;
 
 	//TODO: comment out this line before turning in.
-	system("PAUSE");
+	//system("PAUSE");
 } //end of main

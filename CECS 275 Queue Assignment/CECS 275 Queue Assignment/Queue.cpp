@@ -10,13 +10,14 @@
 
 /**
 * If queue capacity is reached, doubles the available space
+* Note that this already only gets called if necessary...
+*... another appropriate name would simply have been growBuffer()
 */
-void Queue::growBufferIfNecessary() {
-	
-	// update to newSize -- temporary variable
-	int newSize = currentSize * 2;
-	// double the size in new array
-	string* tempBuffer = new string[newSize];	
+void Queue::growBufferIfNecessary() {	
+	// update to newCapacity -- temporary variable
+	int newCapacity = capacity * 2; 
+	// double the capacity in a new array
+	string* tempBuffer = new string[newCapacity];	
 	// copy the content of the array
 	for (int i = 0; i < currentSize; ++i) {
 		tempBuffer[i] = buffer[(head + i) % currentSize]; //modding by currentSize brings things back to zero
@@ -24,14 +25,14 @@ void Queue::growBufferIfNecessary() {
 	//reset head and currentPeek back to zero index for new array
 	head = 0;
 	currentPeek = 0;
-	//set tail to the new endpoint
-	tail = currentSize;
-	// get rid of the contents of the buffer
+	//set tail to the new endpoint index
+	tail = currentSize - 1;
+	// get rid of the old contents of the buffer
 	delete [] buffer;
-	// relocate the tempbuffer to buffer
+	// relocate the buffer pointer to where the new buffer is
 	buffer = tempBuffer;
-	// update the size
-	capacity = newSize;
+	// update buffer capacity
+	capacity = newCapacity;
 } //end of growBufferIfNecessary member function
 
 /**
@@ -40,10 +41,10 @@ void Queue::growBufferIfNecessary() {
 Queue::Queue() {
 	queueAvailable = true;
 	head = 0;
-	tail = 0;
+	tail = 0; 
+	currentSize = 0;
 	capacity = 10;
 	buffer = new string[capacity]; 
-	currentSize = 0;
 	currentPeek = 0;
 } //end of default constructor
 
@@ -96,21 +97,24 @@ Queue::~Queue() {
 * @param newString the new element to add to the string queue
 */
 void Queue::add(string newString) {
-	if (queueAvailable) {
+	if (queueAvailable) { //only add to queue if the queue has not been closed yet
 		// update currentSize
 		++currentSize;
 
-		// update tail.
-		++tail; //increment tail
+		// grow buffer if all the queue is filled up
+		if (currentSize == capacity) { 
+//			std::cout << "Growing queue dynamicaly...\n" << "Contents before growth:\n" << this->to_string() << std::endl;
+			growBufferIfNecessary();
+			//(note that tail will be reset again in this function if buffer grew)
+		} //end of if
+
+	    // add string to tail position
+		buffer[tail] = newString;
+
+		// update tail. 
+		++tail; //increment tail 
 		tail %= capacity; //mod down to capacity, in case of overflow off of buffer
 
-		// grow buffer if all the queue is filled up
-		if (currentSize >= capacity) {
-			growBufferIfNecessary();
-		} //end of if	  
-
-		// change the content of new tail position
-		buffer[tail] = newString;
 	} //end of if
 	else //queue not available to add new strings to
 		throw FilledException(newString);
@@ -124,8 +128,8 @@ string Queue::remove() {
 	// NOTE: no point of removing the content the current head index
 	//		 because the head index is keeping the track of
 	//		 "valid" content of the array.
-	//		 Though the previous value is still stored in the previous head
-	//		 we will consider it "not valid", because the head index is updated.
+	//		 Though the previous value is still stored in the previous head,
+	//		 we will consider it "not-valid", because the head index is updated away.
 	//		 i.e. the previous content that is not indexed by current head value
 	//		 is no longer valid for us.
 
@@ -133,11 +137,11 @@ string Queue::remove() {
 	string temp = buffer[head];
 	
 	// update current size
-	if (currentSize > 0) { //TODO should't we be checking this for EVERYHTING, besides just updating currentSize?
+	if (currentSize > 0) { //TODO shouldn't we be checking this for EVERYTHING, besides just updating currentSize?
 		--currentSize;
 	} // end of if
 
-	++head; //increment head (therefore "invalidating" previous head
+	++head; //increment head (therefore "invalidating" previous head)
 	head %= capacity; //cycle it around the buffer, if necessary
 
 	return temp;
@@ -152,11 +156,12 @@ string Queue::peek() {
 } //end of peek Queue member function
 
 /**
- * display the content of the class
+ * Display the content of the queue
  * @return a string with current information about the queue
  */
 string Queue::to_string(){
 	std::stringstream sstream;
+	/*
 	sstream << "\nTo_string Function gives:\n";
 	sstream << "head: " << head << std::endl;
 	sstream << "tail: " << tail << std::endl;
@@ -164,11 +169,15 @@ string Queue::to_string(){
 	sstream << "currentSize: " << currentSize << std::endl;
 	sstream << "currentPeek: " << currentPeek << std::endl;
 	sstream << "Member strings are: " << std::endl;
-	while (this->peekHasNext()) {
-		//input current element
+	*/
+
+	this->peekReset();
+	//first element to the stream
+	sstream << this->peek() << std::endl;
+	while (this->peekHasNext()) { //while there is a next element
+		//input next element to stream
 		sstream << this->peekNext() << std::endl;
 	} //end of while
-	sstream << std::endl;
 
 	return sstream.str();
 } //end of to_string function
@@ -185,6 +194,10 @@ void Queue::peekReset() {
 * @returns true if there is an available string in the queue after the currentPeek index slot
 */
 bool Queue::peekHasNext() {
+	bool hasNext = true;
+	if (currentPeek == tail)	hasNext = false; 
+	return hasNext;
+/*	//OLD VERSION:
 	bool next = false;
 
 	// if (tail-head) is positive the peek value will increment
@@ -194,7 +207,7 @@ bool Queue::peekHasNext() {
 
 	// check if all the queue is filled up
 	if (currentSize == capacity) {
-		// there is always a next.
+		// there is always a next. NOTE: WHAT IF WE'RE AT END OF QUEUE? PROBABLY DON'T WANT THIS TO KEEP GOING FOREVER
 		next = true;
 	} else {
 		
@@ -210,31 +223,14 @@ bool Queue::peekHasNext() {
 		}
 	}
 	return next;
-
+	*/
 } //end of Queue peekHasNext member function
 
 /**
-* Updates the currentPeek index to the next one up
-
-* @returns a string??.... I think the instructions must be wrong.
-* ...I think it shouldn't actually return anything, as it's just updating a value
-* NOTE how this gets used in 1) and 2) in Main.cpp!!
-
+* Updates the currentPeek index to the next one up and shows what's in that slot.
+* @returns the string in the next queue position
 */
 string Queue::peekNext() {
-	// NOTE TO BERNARDO:
-	//	I think this is supposed to return string, because the member function
-	//	peek would only return the content of the head.
-	//	Therefore, peekNext will take care of the other peeking method.
-	//	I think this could be the only reason why he would put it  like this.
-	//	Since this is not like an array and it is more like linked list, I
-	//	would say peeking a value would be using the "harder way."
-	//	I know that it does not make any sense, but I'm trying to put myself
-	//	in professor's shoe.
-
-	// I guess the functionality of this is getting the next peek value?????
-	// confused...
-
 	// update currentPeek value
 	currentPeek = (currentPeek + 1) % capacity;
 
@@ -256,3 +252,11 @@ void Queue::closeQueue() {
 bool Queue::getQueueAvailability() {
 	return queueAvailable;
 } //end of getQueueAvailability function
+
+/**
+* Checks whether a queue has no string in it
+* @returns false if the queue is empty
+*/
+bool Queue::isEmpty() {
+	return (currentSize == 0);
+} //end of isEmpty member function

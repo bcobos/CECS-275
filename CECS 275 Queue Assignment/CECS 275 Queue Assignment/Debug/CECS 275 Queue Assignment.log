@@ -1,2 +1,5 @@
 ﻿  Main.cpp
+  Queue.cpp
+c:\users\cobos\onedrive\documents\github\cecs275\cecs 275 queue assignment\cecs 275 queue assignment\queue.cpp(22): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   CECS 275 Queue Assignment.vcxproj -> C:\Users\cobos\OneDrive\Documents\GitHub\CECS275\CECS 275 Queue Assignment\Debug\CECS 275 Queue Assignment.exe

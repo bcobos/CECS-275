@@ -36,6 +36,7 @@ public:
 	string to_string();
 	void closeQueue();
 	bool getQueueAvailability();
+	bool isEmpty();
 
 	//"Iterator" functions:
 	void peekReset();
