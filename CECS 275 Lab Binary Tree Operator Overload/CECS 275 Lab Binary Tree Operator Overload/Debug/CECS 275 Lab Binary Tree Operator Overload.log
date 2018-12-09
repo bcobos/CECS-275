@@ -1,5 +1,4 @@
 ﻿  BinaryTree.cpp
-c:\users\cobos\source\repos\cecs 275 lab binary tree operator overload\cecs 275 lab binary tree operator overload\binarytree.cpp(127): warning C4715: 'BinaryTree::findIndex': not all control paths return a value
-c:\users\cobos\source\repos\cecs 275 lab binary tree operator overload\cecs 275 lab binary tree operator overload\binarytree.cpp(115): warning C4172: returning address of local variable or temporary: current
-c:\users\cobos\source\repos\cecs 275 lab binary tree operator overload\cecs 275 lab binary tree operator overload\binarytree.cpp(121): warning C4172: returning address of local variable or temporary: current
-  CECS 275 Lab Binary Tree Operator Overload.vcxproj -> C:\Users\cobos\source\repos\CECS 275 Lab Binary Tree Operator Overload\Debug\CECS 275 Lab Binary Tree Operator Overload.exe
+  Main.cpp
+  Generating Code...
+  CECS 275 Lab Binary Tree Operator Overload.vcxproj -> C:\Users\cobos\OneDrive\Documents\GitHub\CECS275\CECS 275 Lab Binary Tree Operator Overload\Debug\CECS 275 Lab Binary Tree Operator Overload.exe
