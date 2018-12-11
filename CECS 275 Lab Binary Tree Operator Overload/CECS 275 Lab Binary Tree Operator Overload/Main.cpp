@@ -12,7 +12,7 @@
 using namespace std;
 
 int main() {
-
+	/*
 	int numb = 0;
 
 	BinaryTree tree;
@@ -46,8 +46,46 @@ int main() {
 	catch (BinaryTree::IndexOutOfBoundsException exc) {
 		cout << exc.getMessage() << endl;
 	}
-	cout << endl << "Completed successfully" << endl;
+	*/
 
+	int sizeOfBST = 15;
+	BinaryTree BST = BinaryTree();
+	BST.insertNode("Larry Doering");
+	cout << "After one insert, we have..." << endl;
+	cout << "The width of the tree is: " << BST.getMaxWidth() << endl;
+	cout << "The height of the tree is: " << BST.getHeight() << endl;
+	cout << "The number of nodes currently in the tree is: " << BST.countNodes() << endl << endl;
+
+	BST.insertNode("Grant Stoltz");
+	BST.insertNode("Randy Kerdun");
+	cout << "After three inserts, we have..." << endl;
+	cout << "The width of the tree is: " << BST.getMaxWidth() << endl;
+	cout << "The height of the tree is: " << BST.getHeight() << endl;
+	cout << "The number of nodes currently in the tree is: " << BST.countNodes() << endl << endl;
+
+	BST.insertNode("Dennis Miller");
+	BST.insertNode("Kerry Tomei");
+	BST.insertNode("Nancy Reagan");
+	BST.insertNode("Veronica Mars");
+	BST.insertNode("Bianca Bjorn");
+	cout << "After eight inserts, we have..." << endl;
+	cout << "The width of the tree is: " << BST.getMaxWidth() << endl;
+	cout << "The height of the tree is: " << BST.getHeight() << endl;
+	cout << "The number of nodes currently in the tree is: " << BST.countNodes() << endl << endl;
+
+	BST.insertNode("Francine Hoffman");
+	BST.insertNode("Helene Black");
+	BST.insertNode("Kooper Sloan");
+	BST.insertNode("Monica Faber");
+	BST.insertNode("Oprah Winnona");
+	BST.insertNode("Paula Abdul");
+	BST.insertNode("Sandra Day O'Connor");
+	cout << "After fifteen inserts, we have..." << endl;
+	cout << "The width of the tree is: " << BST.getMaxWidth() << endl;
+	cout << "The height of the tree is: " << BST.getHeight() << endl;
+	cout << "The number of nodes currently in the tree is: " << BST.countNodes() << endl << endl;
+
+	cout << endl << "Completed successfully" << endl;
 	//TODO: delete:
-	//system("PAUSE");
+	system("PAUSE");
 } //end of main

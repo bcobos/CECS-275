@@ -111,6 +111,9 @@ bool BinaryTree::searchNode(string item)
 * @returns the desired TreeNode, or nullptr if failed search
 */
 BinaryTree::TreeNode* BinaryTree::findByIndex(TreeNode* current, int& indexCounter) const {
+	//BEFORE ANYTHING, protect ourselves from current being nullptr. Things will break if it is...
+	if (current == nullptr)	return nullptr; //(this happens if the tree is empty)
+
 	//NEW LINE OF THOUGHT
 	//Simple: check left subtree, check me, check right. IN THIS ORDER! FOR EVERY NODE!
 	//If no node is returned after that, return nullptr
@@ -226,3 +229,76 @@ string BinaryTree::operator[](int index) {
 	else //everything is a-okay.
 		return treeNodePtr -> value;
 } //end of operator[]
+
+
+//Pseudocode for width of tree algorithm
+//width = how many nodes you have at a given level
+//indexing at level one (ie, root node is level one, its children level 2)
+/**
+* Gives the width of a tree at a given level.
+* We are considering the root node to be at level 0 
+* @param current a pointer to the current tree node
+* @param level number of levels to go down to from here
+* @return the width at the specified level
+*/
+int BinaryTree::getWidth(BinaryTree::TreeNode* current, int level){
+	//TODO for extra polish: throw exception if level < 0
+	//note if level > height of tree, this will count 0 nodes there b/c of the next line.
+	if (current == nullptr)	return 0; //No node to count here.
+	else { //This is a real node
+		if (level == 0)	{ //Go down no more levels
+			return 1; //Count this node
+		} else { //if (level >= 1) 
+	    //Means we still need to dive deeper into the tree.
+		//Add the #nodes you find in the subtrees at a level down, if that's the final level
+			return getWidth(current->left, level - 1) //check left branch one level down
+				+ getWidth(current->right, level - 1); //check right branch one level down
+		} //end of else
+	} //end of else
+} //end of getWidth private helper function
+
+/**
+* Finds the maximum width in the tree
+* @returns the # of nodes in the widest level of the tree
+*/
+int BinaryTree::getMaxWidth() {
+	int maxWidth = 0;
+	//update maxWidth if the tree is not empty:
+	if (root != nullptr) {
+		int treeHeight = getHeight();
+		for (int i = 1; i <= treeHeight; ++i) { //traverse each level
+			//Get the level's width
+			int currentWidth = getWidth(root, i);
+			//Compare it to current max, and update max if necessary
+			if (currentWidth > maxWidth)	maxWidth = currentWidth;
+		} //end of for loop
+	} //end of if
+	return maxWidth;
+} //end of getMaxWidth member function
+
+/**
+* Counts nodes in this tree
+* @returns the number of nodes in this tree
+*/
+int BinaryTree::countNodes() {
+	return countNodes(root);
+} //end of countNodes member function
+
+/**
+* Recursively counts nodes in this (sub)tree
+* @returns the number of nodes in the subtree with root nodePtr
+*/
+int BinaryTree::countNodes(BinaryTree::TreeNode* nodePtr) {
+	//Base Case:
+	if (nodePtr == nullptr)	
+		return 0;
+
+	//Recursion:
+	//Count self plus left subtree nodes plus right subtree nodes.
+	return 1 + countNodes(nodePtr->left) + countNodes(nodePtr->right);
+} //end of countNodes helper member function
+
+
+/**
+* 
+*/

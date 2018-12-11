@@ -33,6 +33,9 @@ private:
 	void insert(TreeNode *&, TreeNode *&);
 	void destroySubTree(TreeNode *);
 	TreeNode* findByIndex(TreeNode* current, int& index) const;
+	int getWidth(TreeNode* current, int level);
+	int countNodes(TreeNode* nodePtr);
+	int getHeight(TreeNode* nodePtr);
 		
 public:
 	// Constructor
@@ -48,6 +51,9 @@ public:
 	void insertNode(string item);
 	bool searchNode(string item);
 	string operator[](int index);
+	int getMaxWidth();
+	int getHeight();
+	int countNodes();
 
 	//Exception class:
 	struct IndexOutOfBoundsException {
